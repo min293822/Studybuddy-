@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="rmd-container">
+  {% include 'topic.html' %}
+  <div class="room_detail_container">
+    <h2>{{room.name}}</h2>
+    <p>{{room.description}}</p>
+    <h3>Conversation</h3>
+    <hr>
+    {% for message in messa %}
+    <small><a href="{% url 'userInfo' %}">@{{message.user}} </a>{{message.updated|timesince}} ago</small>
+    <p>{{message.body}}</p>
+    {% if request.user == message.user %}
+    <a href="{% url 'delete-message' message.id %}">Delete</a>
+    {% endif %}
+    <hr>
+    {% endfor %}
+    {% if request.user.is_authenticated %}
+    <div class="con">
+      <form method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Write comments..." name="comment" required>
+        <input type="submit" value="enter">
+      </form>
+    </div>
+    {% endif %}
+  </div>
+  {% include 'activity.html' %}
+</div>
+{% endblock %}

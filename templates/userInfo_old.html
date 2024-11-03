@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="userInfo-container">
+  {% include 'topic.html' %}
+  
+  <div class="user-container">
+   <h3>{{user.username}}</h3>
+   {% for room in rooms %}
+   <div class="ceate_room">{{room.name}}</div>
+   {% endfor %}
+  </div>
+    
+  {% include 'activity.html' %}
+</div>
+
+{% endblock %}

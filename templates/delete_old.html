@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="delete-container">
+  <h4>Are you sure to delete "{{room}}{{message}}"</h4>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+
+<div class="room-container">
+  {% if request.user.is_authenticated %}
+  <a href="{% url 'room_form' %}">Create Room</a>
+  {% endif %}
+  <div class="room">
+  {% for room in rooms %}
+  <small><a href="{% url 'userInfo'  room.host.id %}">@{{room.host.username}}</a></small>
+  <p>{{room.id}} -- <a href="{% url 'room-details' room.id %}">{{room.name}}</a></p>
+  <small>{{room.topic.name}}</small>
+  <p>{{room.participants.count}} joined</p>
+  {% if request.user == room.host %}
+    <a href="{% url 'delete-room' room.id %}">Delete</a>
+  {% endif %}
+  <hr>
+  {% endfor %}
+  </div>
+
+</div>
